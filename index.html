@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Pioneer Bank</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <div id="login-area">
         <h1 class="text-center">Welcome to Pioneer Bank</h1>
@@ -45,7 +48,8 @@
             <div class="col-md-6">
                 <div class="submit-area">
                     <h4>Deposit</h4>
-                    <input id="depositAmount" type="text" class="form-control" placeholder="$ amount you want to deposit">
+                    <input id="depositAmount" type="text" class="form-control"
+                        placeholder="$ amount you want to deposit">
                     <br>
                     <button id="addDeposit" class="btn btn-success">Deposit</button>
                 </div>
@@ -53,15 +57,17 @@
             <div class="col-md-6">
                 <div class="submit-area">
                     <h4>Withdraw</h4>
-                    <input id="withdrawAmount" type="text" class="form-control" placeholder="$ amount you want to withdraw">
+                    <input id="withdrawAmount" type="text" class="form-control"
+                        placeholder="$ amount you want to withdraw">
                     <br>
                     <button id="addWithdraw" class="btn btn-success">Withdraw</button>
                 </div>
             </div>
         </div>
     </div>
-   
+
     <script>
+        // login area handler
         const loginBtn = document.getElementById('login');
         loginBtn.addEventListener('click', function () {
             const loginArea = document.getElementById('login-area');
@@ -69,7 +75,45 @@
             const transactionArea = document.getElementById('transaction-area');
             transactionArea.style.display = "block";
         })
+
+        // deposit button handler
+        const depositBtn = document.getElementById('addDeposit');
+        depositBtn.addEventListener('click', function () {
+            const depositNumber = getInputNumber('depositAmount');
+
+            updateSpanText("currentDeposit", depositNumber);
+            updateSpanText("currentBalance", depositNumber);
+
+            document.getElementById('depositAmount').value = "";
+        })
+
+        // withdraw handler
+        const addWithdraw = document.getElementById('addWithdraw');
+        addWithdraw.addEventListener('click', function () {
+            const withdrawNumber = getInputNumber('withdrawAmount');
+
+            updateSpanText("currentWithdraw", withdrawNumber)
+            updateSpanText("currentBalance", -1 * withdrawNumber)
+
+            document.getElementById('withdrawAmount').value = "";
+
+        })
+
+        function getInputNumber(id) {
+            const amount = document.getElementById(id).value;
+            const withdrawAmountNumber = parseFloat(amount);
+            return withdrawAmountNumber;
+        }
+
+
+        function updateSpanText(id, depositNumber) {
+            const current = document.getElementById(id).innerText;
+            const currentBalanceNumber = parseFloat(current);
+            const totalAmount = currentBalanceNumber + depositNumber;
+            document.getElementById(id).innerText = totalAmount;
+        }
     </script>
 
 </body>
+
 </html>
