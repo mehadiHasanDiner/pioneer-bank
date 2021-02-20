@@ -101,15 +101,15 @@
 
         function getInputNumber(id) {
             const amount = document.getElementById(id).value;
-            const withdrawAmountNumber = parseFloat(amount);
-            return withdrawAmountNumber;
+            const amountNumber = parseFloat(amount);
+            return amountNumber;
         }
 
 
         function updateSpanText(id, depositNumber) {
             const current = document.getElementById(id).innerText;
-            const currentBalanceNumber = parseFloat(current);
-            const totalAmount = currentBalanceNumber + depositNumber;
+            const balanceNumber = parseFloat(current);
+            const totalAmount = balanceNumber + depositNumber;
             document.getElementById(id).innerText = totalAmount;
         }
     </script>
